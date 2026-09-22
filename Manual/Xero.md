@@ -269,16 +269,16 @@ void ApplyInitialImage()
 ## CacheManager の使い方
 
 - 目的
-  - 読み込んだ値を再利用し、未登録キーによる KeyNotFoundException を避ける
+  - メモリ内に保持した値を再利用し、未登録キーによる KeyNotFoundException を避ける
 - 前提
+  - CacheManager が保持するのはメモリ内の値だけ
   - 対応する型は string、Texture2D、GameObject
   - 値は型とキーの組で管理される
-  - Get と GetStorage は、指定した型とキーの組が存在しない場合に KeyNotFoundException を投げる
+  - Get は、指定した型とキーの組が存在しない場合に KeyNotFoundException を投げる
 - 実装手順
   - 読み込み前に Exist で同じ型とキーの組を確認する
   - 存在する場合だけ Get を呼ぶ
   - 存在しない場合は元データを読み込み、Set で登録する
-  - GetStorage が必要な場合も、存在することを確認してから呼ぶ
 - コード例
 
     using UnityEngine;
@@ -308,6 +308,5 @@ void ApplyInitialImage()
   - Get は使用順を更新する。件数上限に達したときは、最後に使用してから最も時間が経ったキーが追い出される
   - SetMaxCount は型ごとに設定する。0 を指定すると新しい値は保持されないため、Set の直後でも Get は失敗する
   - Unlimited を指定すると件数上限を解除する
-  - GetStorage の戻り値は、現在の実装では存在するキーに対して Memory のみ
-  - Clear の includePersistent 引数は現在の実装では動作に影響しない
+  - キャッシュはアプリをまたいで保存されない
   - Set で渡した GameObject と Texture2D は、Delete や Clear のときに CacheManager が破棄しない
