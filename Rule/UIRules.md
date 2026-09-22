@@ -13,6 +13,7 @@
 - UGUIを使用しない
     - VisualElment、Button Toggle等の標準UI要素を使わない
 - ussファイルは使用しない
+- ボタンの背景色に白を使用しない
 
 ## UI要素命名規約
 
@@ -38,5 +39,6 @@ UIBuilder上でつける名前を指す
 - UIListView は itemTemplate の設定を必須とする
     - ユーザーがUIBuilderで設定する運用
 - UXMLはGUID形式を必須とし、/Assets/ 形式や相対パス形式を使わない
-
+- UILabel の初期値に "Label" を残さない
+    - 未確定の値を表示する場合、数値は 0、文字列は空文字を初期値にする
 
